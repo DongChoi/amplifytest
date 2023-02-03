@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [message, setMessage] = useState({
+    data: null,
+    isLoading: true,
+  });
+
+  useEffect(function fetchMessageWhenMounted() {
+    async function fetchMessage() {
+      console.log("use effect running");
+      const userResult = await axios.get("http://127.0.0.1:5001/");
+      console.log("got past axios");
+      setMessage({
+        data: userResult.data,
+        isLoading: false,
+      });
+    }
+    fetchMessage();
+  }, []);
+
+  if (message.isLoading) return <i>Loading...</i>;
+
+  console.log("is it getting to console.log? ", message);
+
+  return <div className="App">{message.data.data}</div>;
 }
 
 export default App;

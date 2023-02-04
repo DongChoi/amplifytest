@@ -12,7 +12,7 @@ function App() {
     async function fetchMessage() {
       console.log("use effect running");
       const userResult = await axios.get(
-        "http://testenvdongchoi.us-west-1.elasticbeanstalk.com/"
+        "https://elasticbeanstalk.andrewchoi.dev/"
       );
       console.log("got past axios");
       setMessage({

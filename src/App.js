@@ -11,9 +11,7 @@ function App() {
   useEffect(function fetchMessageWhenMounted() {
     async function fetchMessage() {
       console.log("use effect running");
-      const userResult = await axios.get(
-        "http://testenvdongchoi.us-west-1.elasticbeanstalk.com/"
-      );
+      const userResult = await axios.get("https://127.0.0.1:5000");
       console.log("got past axios");
       setMessage({
         data: userResult.data,
